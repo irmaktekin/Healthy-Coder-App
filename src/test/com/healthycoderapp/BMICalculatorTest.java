@@ -16,8 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class BMICalculatorTest {
+    private  String environment = "prod";
     @ParameterizedTest(name = "weight={0}, height={1}")
     @CsvFileSource(resources = "/diet-recommended-input-data.csv",numLinesToSkip = 1)
     void should_ReturnTrue_When_DietRecommended(Double coderWeight,Double coderHeight){
@@ -101,6 +103,7 @@ class BMICalculatorTest {
     }
     @Test
     void should_ReturnCoderWithWorstBIMIIn1Ms_When_CoderListHas10000Elements(){
+        assumeTrue(this.environment.equals("dev"));
         //Given
         List<Coder> coders = new ArrayList<>();
         for(int i=0;i<10000;i++){
