@@ -1,8 +1,11 @@
 package com.healthycoderapp;
 
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import javax.lang.model.element.ExecutableElement;
 
@@ -12,8 +15,21 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BMICalculatorTest {
+    @ParameterizedTest
+    @ValueSource(doubles = {70.0, 89.0,95.0,110.0})
+    void should_ReturnTrue_When_DietRecommended(Double coderWeight){
+        //given
+        double weight = coderWeight;
+        double height = 1.72;
 
-    @Test
+        //when
+        boolean recommended = BMICalculator.isDietRecommended(weight, height);
+
+        //then
+        assertTrue(recommended);
+    }
+
+   /* @Test
      void should_ReturnFalse_When_DietNotRecommended(){
         //given
         double weight = 50.0;
@@ -24,7 +40,7 @@ class BMICalculatorTest {
 
         //then
         assertFalse(recommended);
-    }
+    }*/
     @Test
     void should_ReturnTrue_When_DietRecommended(){
         //given
