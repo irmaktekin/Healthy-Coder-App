@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import javax.lang.model.element.ExecutableElement;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,6 +98,18 @@ class BMICalculatorTest {
         );
 
 
+    }
+    @Test
+    void should_ReturnCoderWithWorstBIMIIn1Ms_When_CoderListHas10000Elements(){
+        //Given
+        List<Coder> coders = new ArrayList<>();
+        for(int i=0;i<10000;i++){
+            coders.add(new Coder(1.0+i,10.0+i));
+        }
+        //When
+        Executable executable = ()->BMICalculator.findCoderWithWorstBMI(coders);
+        //Then
+        assertTimeout(Duration.ofMillis(1),executable);
     }
     //
     @Test
